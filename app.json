@@ -1,23 +1,26 @@
 {
-  "name": "Didula-MD",
-  "description": "Didula-MD has been designed to make things easier and fun while using WhatsApp. ❤️",
-  "logo": "https://i.ibb.co/tC37Q7B/20241220-122443.jpg",
-  "keywords": ["didulamd", "bot", "whatsapp bot", "multi device", "didula-md"],
+  "name": "Ganesha-MD",
+  "description": "Ganesha-MD is a powerful multi-device WhatsApp bot designed to make your life easier and more fun! ❤️",
+  "logo": "https://i.ibb.co/gFPg40xf/1631.jpg",
+  "keywords": ["ganeshamd", "whatsapp bot", "multi device", "ganesha-md"],
   "success_url": "/",
 
   "env": {
     "SESSION_ID": {
-            "description": "Paste Your PRABATH-MD session",
-            "required": true,
-            "value": ""
-        }
+      "description": "Paste your WhatsApp session ID here",
+      "required": true,
+      "value": ""
     },
-         "buildpacks": [
-        {
-            "url": "https://github.com/heroku/heroku-buildpack-nodejs.git"
-        }
-     ],
+    "API_KEY": {
+      "description": "Your encrypted API key for external services",
+      "required": false,
+      "value": ""
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs.git"
+    }
+  ],
   "stack": "heroku-24"
-
-
 }
