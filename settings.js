@@ -1,28 +1,103 @@
 const fs = require('fs');
-if (fs.existsSync('config.env')) require('dotenv').config({ path: './config.env' });
 
+// Function to convert text to boolean
 function convertToBool(text, fault = 'true') {
     return text === fault ? true : false;
 }
 
+// Configuration object
 module.exports = {
-    SESSION_ID: process.env.SESSION_ID === undefined ? 'put your session id' : process.env.SESSION_ID,
-    PREFIX: process.env.PREFIX || '.',
-    FOOTER: process.env.FOOTER || "*✦𝐃𝐢𝐝𝐮𝐥𝐚 𝐌𝐃 𝐕𝟐✦*",
-    ALIVE_IMG: process.env.ALIVE_IMG || "https://files.catbox.moe/za6ytm.jpg",
-    PORT: process.env.PORT === undefined ? "8000" : process.env.PORT,
-HEART_REACT: process.env.HEART_REACT || 'false',
-    SUDO: process.env.SUDO === undefined ? '94741671668,94771820962' : process.env.SUDO,
-    ALIVE_MSG: process.env.ALIVE_MSG === undefined ? "*Hello, I am alive now!!*" : process.env.ALIVE_MSG,
-    AUTO_READ_STATUS: process.env.AUTO_READ_STATUS === undefined ? "true" : process.env.AUTO_READ_STATUS,
-    MODE: process.env.MODE === undefined ? "public" : process.env.MODE,
-    ANTI_BAD: process.env.ANTI_BAD === undefined ? "false" : process.env.ANTI_BAD,
-    ANTI_LINK: process.env.ANTI_LINK === undefined ? "false" : process.env.ANTI_LINK,
-    ANTI_CALL: process.env.ANTI_CALL === undefined ? "false" : process.env.ANTI_CALL,
-    ANTI_DELETE: process.env.ANTI_DELETE === undefined ? "false" : process.env.ANTI_DELETE,
-    ANTI_BOT: process.env.ANTI_BOT === undefined ? "false" : process.env.ANTI_BOT,
-    READ_CMD: process.env.READ_CMD === undefined ? "false" : process.env.READ_CMD,
-    RECORDING: process.env.RECORDING === undefined ? "false" : process.env.RECORDING,
-    AI_CHAT: process.env.AI_CHAT === undefined ? "false" : process.env.AI_CHAT,
-    AUTO_SONG_SENDER: process.env.AUTO_SONG_SENDER === undefined ? "false" : process.env.AUTO_SONG_SENDER
+    // Bot name
+    BOT_NAME: 'Ganesha-MD',
+
+    // Session ID (required)
+    SESSION_ID: 'put your session id',
+
+    // Command prefix
+    PREFIX: '.',
+
+    // Footer text
+    FOOTER: '*✦𝐆𝐚𝐧𝐞𝐬𝐡𝐚 𝐌𝐃✦*',
+
+    // Alive image URL
+    ALIVE_IMG: 'https://files.catbox.moe/za6ytm.jpg',
+
+    // Port for the bot to run on
+    PORT: '8000',
+
+    // Heart reaction (true/false)
+    HEART_REACT: convertToBool('false'),
+
+    // Sudo users (admin numbers)
+    SUDO: '+94741252876,+94712345678',
+
+    // Alive message
+    ALIVE_MSG: '*Hello, I am alive now!!*',
+
+    // Auto read status (true/false)
+    AUTO_READ_STATUS: convertToBool('true'),
+
+    // Bot mode (public/private)
+    MODE: 'public',
+
+    // Anti-bad words (true/false)
+    ANTI_BAD: convertToBool('false'),
+
+    // Anti-links (true/false)
+    ANTI_LINK: convertToBool('false'),
+
+    // Anti-calls (true/false)
+    ANTI_CALL: convertToBool('false'),
+
+    // Anti-delete (true/false)
+    ANTI_DELETE: convertToBool('false'),
+
+    // Anti-bot (true/false)
+    ANTI_BOT: convertToBool('false'),
+
+    // Read commands (true/false)
+    READ_CMD: convertToBool('false'),
+
+    // Recording (true/false)
+    RECORDING: convertToBool('false'),
+
+    // AI chat (true/false)
+    AI_CHAT: convertToBool('false'),
+
+    // Auto song sender (true/false)
+    AUTO_SONG_SENDER: convertToBool('false'),
+
+    // Encryption key (32 characters long)
+    ENCRYPTION_KEY: 'your-32-character-encryption-key'
 };
+
+// Encryption and decryption functions
+const crypto = require('crypto');
+const IV_LENGTH = 16; // AES block size
+
+// Function to encrypt data
+function encrypt(text) {
+    const iv = crypto.randomBytes(IV_LENGTH); // Random initialization vector
+    const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(module.exports.ENCRYPTION_KEY), iv);
+    let encrypted = cipher.update(text, 'utf8', 'hex');
+    encrypted += cipher.final('hex');
+    return `${iv.toString('hex')}:${encrypted}`; // IV + encrypted data
+}
+
+// Function to decrypt data
+function decrypt(text) {
+    const [ivHex, encryptedText] = text.split(':'); // Split IV and encrypted data
+    const iv = Buffer.from(ivHex, 'hex');
+    const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(module.exports.ENCRYPTION_KEY), iv);
+    let decrypted = decipher.update(encryptedText, 'hex', 'utf8');
+    decrypted += decipher.final('utf8');
+    return decrypted;
+}
+
+// Example usage of encryption and decryption
+const apiKey = 'your-api-key-here'; // Replace with your actual API key
+const encryptedKey = encrypt(apiKey); // Encrypt the API key
+console.log('Encrypted API Key:', encryptedKey);
+
+const decryptedKey = decrypt(encryptedKey); // Decrypt the API key
+console.log('Decrypted API Key:', decryptedKey);
