@@ -1,12 +1,12 @@
 {
-  "name": "Didula-MD",
+  "name": "Ganesha-MD",
   "version": "1.0.0",
   "description": "A WhatsApp bot created using Node.js",
   "main": "start.js",
   "scripts": {
-    "start": "pm2 start start.js --deep-monitoring --attach --name Didula-MD",
-    "stop": "pm2 stop Didula-MD",
-    "restart": "pm2 restart Didula-MD"
+    "start": "pm2 start start.js --deep-monitoring --attach --name Ganesha-MD",
+    "stop": "pm2 stop Ganesha-MD",
+    "restart": "pm2 restart Ganesha-MD"
   },
   "dependencies": {
     "@whiskeysockets/baileys": "npm:asitha-baliyes-new",
