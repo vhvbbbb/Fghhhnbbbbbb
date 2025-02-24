@@ -1,4 +1,4 @@
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Rockstar-ExtraBold&color=F01&lines=Didula+MD+V2)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Rockstar-ExtraBold&color=F01&lines=ganesha+MD+V1)](https://git.io/typing-svg)
 
 
 
@@ -80,4 +80,4 @@ jobs:
  # send error report 
 
 
-<a href="https://wa.me/+94741671668?text=𝐃𝐢𝐝𝐮𝐥𝐚+𝐌𝐃+𝐕𝟐"><img height= "35" title="Author" src="https://img.shields.io/badge/Send Error Report:-white?style=for-the-badge&logo=whatsapp"></a>
+<a href="https://wa.me/+94741252876?text=ganesha+md+𝐕𝟐"><img height= "35" title="Author" src="https://img.shields.io/badge/Send Error Report:-white?style=for-the-badge&logo=whatsapp"></a>
