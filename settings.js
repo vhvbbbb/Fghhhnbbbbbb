@@ -11,7 +11,7 @@ module.exports = {
     BOT_NAME: 'Ganesha-MD',
 
     // Session ID (required)
-    SESSION_ID: 'put your session id',
+    SESSION_ID: 'GANESHA-MD~Fzlh0ZLA#wTiIrjn4h1XT-yNDNkwFDW445LsGqjc0M2Mdeh7IDAs',
 
     // Command prefix
     PREFIX: '.',
