@@ -1,0 +1,30 @@
+name: Deploy App
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Deploy to Server
+        env:
+          SSH_PRIVATE_KEY: ${{ cat ~/.ssh/id_rsa }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh -o StrictHostKeyChecking=no ${{ ganeshamd }}@${{ secrets.SERVER_IP }} "cd /var/www/myapp && git pull && npm install && pm2 restart app"
